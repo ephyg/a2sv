@@ -4,9 +4,7 @@ class Solution:
         tot=0
         for (key,value) in ans.items():
             mod=value % (key+1)
-            # print(mod,key,value)
             if mod!=0:
-                tot+=(value+key+1-mod)
-            else:
-                tot+=value
+                tot+=(key+1-mod)
+            tot+=value
         return tot
