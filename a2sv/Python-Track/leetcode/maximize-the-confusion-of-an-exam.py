@@ -1,22 +1,16 @@
 class Solution:
     def maxConsecutiveAnswers(self, answerKey: str, k: int) -> int:
-        true,false=0,0
+        dict=defaultdict(int)
         ans=0
         l,r=0,0
         while r<len(answerKey):
-            while min(true,false)<=k and r<len(answerKey):
-                if answerKey[r] == "T" :
-                    true+=1
-                else: 
-                    false+=1
-                if k>=min(false,true):
+            while min(dict["T"],dict["F"])<=k and r<len(answerKey):
+                dict[answerKey[r]]+=1
+                if k>=min(dict["F"],dict["T"]):
                     ans=max(ans,r-l+1)
                 r+=1
-            while min(true,false)>k:
-                if answerKey[l]=="T":
-                    true-=1
-                else:
-                    false-=1
+            while min(dict["T"],dict["F"])>k:
+                dict[answerKey[l]]-=1
                 l+=1
         return ans
 
