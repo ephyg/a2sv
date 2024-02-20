@@ -3,30 +3,48 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
-class Node:
-    def __init__(self,val):
-        self.val=val
-        self.next=None
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        dummy=Node(None)
-        head=dummy
-        temp=dummy
-        while list1 and list2:
-            if list1.val<list2.val:
-                temp.next=list1
-                temp=temp.next
-                list1=list1.next
-            else:
-                temp.next=list2
-                temp=temp.next
-                list2=list2.next
-        while list1:
-            temp.next=list1
-            temp=temp.next
-            list1=list1.next
-        while list2:
-            temp.next=list2
-            temp=temp.next
-            list2=list2.next
-        return head.next
+        if not list1:
+            return list2
+        if not list2:
+            return list1
+        if list1.val<list2.val:
+            list1.next = self.mergeTwoLists(list1.next,list2)
+            return list1
+        else:
+            list2.next = self.mergeTwoLists(list1,list2.next)
+            return list2
+        
+        
+        
+        
+        
+        # dummy=ListNode(None)
+        # temp1=list1
+        # temp2=list2
+        # head=dummy
+        # if not temp1:
+        #     return temp2
+        # else:
+        #     return temp1
+        # print(dummy,temp1,temp2)
+        # def merge(temp1,temp2):
+        #     if not temp1 or not temp2:
+        #         print(temp1)
+        #         return None
+
+        #     if temp2.val >= temp1.val:
+        #         head.next=temp1
+        #         temp1=temp1.next
+        #         head=head.next
+        #     else:
+        #         head.next=temp2
+        #         temp2=temp2.next
+        #         head=head.next
+
+        #     return merge(temp1,temp2)
+        # print(merge(temp1,temp2))
+        # return head
+
+
